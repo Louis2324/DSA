@@ -1,4 +1,7 @@
 #include <iostream>
+#include <algorithm>
+
+using namespace std;
 
 int evaluate (char b[3][3]) {
 
@@ -38,10 +41,63 @@ bool isMovesLeft(char b[3][3]) {
     return false;
 }
 
+int minimax(char b[3][3] , int depth , bool isMax) {
+    int score = evaluate(b);
+    if(score == 10)  return score - depth;
+    if(score == -10) return score + depth;
+    if(!isMovesLeft(b)) return 0;
+
+    if(isMax) {
+        int best = -1000;
+        for(int i = 0 ; i<3 ; i++) {
+            for(int j = 0 ; j<3 ; j++){
+                if(b[i][j] == ' ') {
+                    b[i][j] = 'X';
+                    best = max(best , minimax(b,depth+1,false));
+                    b[i][j] == ' ';
+                }
+            }
+        }
+        return best;
+    } else {
+        int best = 1000;
+         for(int i = 0 ; i<3 ; i++) {
+            for(int j = 0 ; j<3 ; j++){
+                if(b[i][j] == ' ') {
+                    b[i][j] = 'O';
+                    best = max(best , minimax(b,depth+1,true));
+                    b[i][j] == ' ';
+                }
+            }
+        }
+        return best;
+    }
+}
+
 struct Move {
     int row,col;
 };
 
+Move findBestMove (char b[3][3]) {
+    int bestVal = -1000;
+    Move bestMove = { -1 , -1};
+    for (int i = 0 ; i < 3 ; i++) {
+        for ( int j = 0 ; j<3 ;j++) {
+            if(b[i][j] == ' '){
+                b[i][j] = 'X';
+                int moveVal = minimax(b,0,false);
+                b[i][j] = ' ';
+
+                if(moveVal > bestVal) {
+                    bestMove.row = i;
+                    bestMove.col = j;
+                    bestVal = moveVal;
+                }
+            }
+        }
+    }
+    return bestMove;
+}
 
 int main () {
     char board[3][3] = {
