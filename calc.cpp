@@ -8,7 +8,7 @@ int main(){
   cout<<"**CALCULATOR***** \n";
   while (response == 'y')
   {
-    cout<<"MENU \n 1.Add \n 2.Subtract \n 3.Multiply \n 4.Divide \n 5.Modulus";
+    cout<<"MENU \n 1.Add \n 2.Subtract \n 3.Multiply \n 4.Divide \n 5.Modulus \n";
     cout <<"Pick an operation: \n";
     cin>>op;
     cout<<"Enter two digits (a b): ";
