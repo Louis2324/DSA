@@ -17,7 +17,7 @@ bool isPalindrome(string &str) {
 }
 
 int main() {
-    string name = "Louis";
+    string name = "Louis2324";
     cout<<reverseString(name)<<endl;
 
     string palindrome = "reckless";
