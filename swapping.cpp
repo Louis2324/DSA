@@ -17,5 +17,10 @@ int main () {
     cout<<"Before swapping value of a and b is "<<a<<" "<<b<<endl;
     swap(a,b);
     cout<<"After swapping value of a and b is "<<a<<" "<<b<<endl;
+
+    cout<<"Before swap2 value of a and b is "<<a<<" "<<b<<endl;
+    swap2(&a,&b);
+    cout<<"After swap2 value of a and b is "<<a<<" "<<b<<endl;
+
     return 0;
 }
