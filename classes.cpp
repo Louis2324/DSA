@@ -7,21 +7,22 @@ class Fraction {
     int denominator;
 
     public:
-     void setNumerator (int n ) {
+     Fraction& setNumerator (int n ) {
         numerator = n;
+        return *this;
      }
     
      int getNumerator() {
         return numerator;
      }
 
-     void setDenominator (int n ) {
-        if(n=0) {
-            std::cout<<"\nDenominator can't be zero\n";
-            return;
+     Fraction& setDenominator (int n ) {
+        if(n==0) {
+          throw std::invalid_argument("Denominator can't be zero");
         }
 
         denominator = n;
+        return *this;
      }
     
      int getDenominator() {
@@ -32,6 +33,8 @@ class Fraction {
         std::cout<<numerator<<"/"<<denominator ;
         std::cout<<"\n";
      }
+
+     Fraction() {}
 
      Fraction(int numerator , int denominator) {
         this->numerator = numerator ;
@@ -56,7 +59,7 @@ class Fraction {
         this->simplify();
      }
 
-     void simplify() {
+     Fraction& simplify() {
        int gcd = std::gcd(numerator,denominator);
        numerator /= gcd;
        denominator/=gcd;
@@ -64,15 +67,12 @@ class Fraction {
         denominator*=-1;
         numerator*=-1;
        }
+       return *this;
      }
 
 };
 
 int main() {
-    Fraction f1(4,5);
-    f1.print();
-    Fraction f2(0.5);
-    f2.print();
-    Fraction f3 (0.75);
-    f3.print();
+    Fraction f1;
+    f1.setNumerator(10).setDenominator(50).simplify().print();
 }
