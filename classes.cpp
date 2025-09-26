@@ -46,20 +46,23 @@ class Fraction {
             rem = fmod(decimal,(int)decimal);
         }
         int exponent = 0 ;
-        while (rem < 1) {
+        while (!(rem == (int)rem) ) {
             rem*=10;
             exponent++;
         }
         this->denominator = pow(10,exponent);
         this->numerator =((int)decimal*this->denominator) + rem;
+        this->simplify();
      }
 
      void simplify() {
-        if(denominator % numerator == 0) {
-            int currentDenominator = this->denominator;
-            this->denominator = (currentDenominator / numerator);
-            this->numerator = 1;   
-        }
+       int gcd = std::gcd(numerator,denominator);
+       numerator /= gcd;
+       denominator/=gcd;
+       if(denominator<0) {
+        denominator*=-1;
+        numerator*=-1;
+       }
      }
 
 };
@@ -69,6 +72,6 @@ int main() {
     f1.print();
     Fraction f2(0.5);
     f2.print();
-    f2.simplify();
-    f2.print();
+    Fraction f3 (0.75);
+    f3.print();
 }
