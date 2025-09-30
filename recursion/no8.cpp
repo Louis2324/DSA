@@ -13,9 +13,16 @@ int firstIndex( int array[] , int n , int el , int index = 0 ) {
     return firstIndex(array,n,el,index + 1);
 }
 
+int findMax(int arr[] , int n) {
+    if (n==1) return arr[0];
+    int maxOfRest = findMax(arr+1 , n-1);
+    return (arr[0] > maxOfRest) ? arr[0] : maxOfRest ;
+}
+
 int main() {
     int a[6]={5,5,6,20,5,6} ;
     int x = 5;
     cout<<"The last index of "<<x <<" in the array is: "<<lastIndex(a,6,x) <<endl;
     cout<<"The first index of "<<x <<" in the array is: "<<firstIndex(a,6,x)<<endl;
+    cout<<"The greatest element of the array is: " << findMax(a,6)<<endl;
 }
