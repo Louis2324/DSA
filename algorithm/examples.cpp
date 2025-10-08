@@ -34,6 +34,4 @@ int main() {
     cout<<"N=100 , Number of steps for O(n) is: "<<fun1(100)<<"\n";
     cout<<"N=100 , Number of steps for O(N^2) is: "<<fun2(100)<<"\n";
     cout<<"N=10 , Number of steps for O(n^3) is: "<<fun3(10) <<"\n";
-    
-
 }
