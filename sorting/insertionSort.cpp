@@ -26,4 +26,10 @@ int main() {
     printArray(nums,6);
     insertionSort(nums,6);
     printArray(nums,6);
+
+    int arr[] = {12,11,13,5,6};
+    printArray(arr,5);
+    insertionSort(arr,5);
+    cout<<"min is: "<<arr[0]<<" max is: "<<arr[4]<<" \n";
+    printArray(arr,5);
 }
