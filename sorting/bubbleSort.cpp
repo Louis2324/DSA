@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 void printArray(int array[] ,int n) {
   for(int i = 0 ; i<n ; i++) {
