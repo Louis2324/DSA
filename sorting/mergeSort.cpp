@@ -50,8 +50,8 @@ void mergeSort(int arr[] , int n) {
   mergeSort(rightArray, n-mid);
   merge(leftArray,mid,rightArray,n-mid, arr);
 
-  delete leftArray;
-  delete rightArray;
+  delete[] leftArray;
+  delete[] rightArray;
 }
 
 int main() {
