@@ -8,7 +8,7 @@ void printArray(int arr[] , int n ){
 }
 
 void merge(int leftArray[],int leftSize , int rightArray[],int rightSize , int array[]) {
-    int i =0 , l= 0 , r =0 ;
+    int i= 0 , l= 0 , r= 0 ;
 
     while(l < leftSize &&  r < rightSize) {
         if(leftArray[l] < rightArray[r]) {
