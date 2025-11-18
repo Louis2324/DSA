@@ -115,6 +115,42 @@ class LinkedList {
         size--;
      }
 
+     void deleteHead() {
+        if (head == nullptr || size == 0) {
+            cout<<"Empty linked list";
+            return;
+        }
+
+        Node* temp = head ; 
+        head = head->next;
+        delete temp;
+        size--;
+     }
+
+     void deleteAtEnd() {
+        if(head == nullptr) {
+            cout<< "List is empty \n";
+            return;
+        }
+
+        if(head->next  == nullptr) {
+            delete head;
+            head = nullptr;
+            size--;
+            return;
+        }
+
+        Node* temp = head;
+       
+        while(temp->next->next != nullptr) {
+            temp = temp->next;
+        }
+
+        delete temp->next;
+        temp->next = nullptr;
+        size--;
+     }
+
      void display() {
         Node * temp = head;
         while(temp != nullptr ) {
@@ -133,22 +169,34 @@ class LinkedList {
 
 int main() {
     LinkedList nums;
+    cout<<"Adding elements ... \n";
     nums.insertAtEnd(10);
     nums.insertAtEnd(20);
     nums.insertAtEnd(30);
     nums.insertAtEnd(40);
     nums.insertAtBeginning(5);
-
-    cout<<"After adding elements: \n";
     cout<<"Size after addition: "<<nums.getSize()<<"\n";
     nums.display();
 
     cout<<"After deleting 10 \n";
     nums.deleteNode(10);
     nums.display();
-    cout<<nums.getSize()<<" size after deletion \n";
+    cout<<" size after deletion"<<nums.getSize()<<"\n";
 
+    cout<<"Inserting at the third position 90 \n";
     nums.insertAtPosition(90 , 2);
+    nums.display();
+    cout<<"Size after inserting at position: "<<nums.getSize()<<"\n";
+
+    cout<<"Deleting head \n";
+    nums.deleteHead();
+    nums.display();
+    cout<<"Size after deleting head: "<<nums.getSize()<<"\n";
+
+    cout<<"Deleting end \n";
+    nums.deleteAtEnd();
+    nums.display();
+    cout<<"Size after deleting end: "<<nums.getSize() << "\n";
 
     cout<<"End of program \n";
     return 0;
