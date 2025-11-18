@@ -56,6 +56,33 @@ class LinkedList {
         size++;
      }
 
+     void insertAtPosition(int value , int pos) {
+        if(pos<0 || pos>size) {
+            cout<<"Invalid Position \n";
+            return;
+        }
+        if(pos == 0) {
+            insertAtBeginning(value);
+            return;
+        }
+        if(pos == size) {
+            insertAtEnd(value);
+            return;
+        }
+        
+        Node* newNode = new Node(value);
+        Node* temp = head;
+
+        for(int i = 1 ; i < pos ; i++) {
+            temp = temp->next;
+        }
+
+        newNode->next = temp->next;
+        temp->next = newNode;
+        size++;
+
+     }
+
      void deleteNode(int value) {
         if(head == nullptr ) {
             cout<<"List is empty \n";
@@ -66,6 +93,7 @@ class LinkedList {
             Node* temp = head;
             head = head->next;
             delete temp;
+            size--;
             return;
         }
 
@@ -120,6 +148,9 @@ int main() {
     nums.display();
     cout<<nums.getSize()<<" size after deletion \n";
 
+    nums.insertAtPosition(90 , 2);
+
+    cout<<"End of program \n";
     return 0;
 }
 
