@@ -205,6 +205,20 @@ class LinkedList {
         return size;
      }
 
+     void reverse() {
+        Node* current = head;
+        Node* previous = nullptr;
+        Node* n = nullptr;
+
+        while(current!=nullptr) {
+            n = current->next;
+            current->next = previous;
+            previous = current;
+            current = n;
+        }
+        head = previous;
+     }
+
 };
 
 
@@ -249,6 +263,12 @@ int main() {
     cout << "=== Sorting the list ===\n";
     nums.sort();
     cout << "List after sorting: ";
+    nums.display();
+    cout << "\n";
+
+    cout << "=== Reversing the list ===\n";
+    nums.reverse();
+    cout << "List after reversing: ";
     nums.display();
     cout << "\n";
 
