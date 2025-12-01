@@ -189,6 +189,11 @@ class DLL {
     }
 
     void reverse() {
+        if(head == nullptr) {
+            cout<<"Empty \n";
+            return;
+        }
+        
         Node<T>* temp = head; 
 
         while(temp != nullptr) {
