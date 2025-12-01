@@ -167,7 +167,7 @@ class DLL {
             return;
         }
 
-        if(index == size) {
+        if(index == size - 1) {
             deleteEnd();
             return;
         }
@@ -193,7 +193,7 @@ class DLL {
             cout<<"Empty \n";
             return;
         }
-        
+
         Node<T>* temp = head; 
 
         while(temp != nullptr) {
@@ -205,6 +205,56 @@ class DLL {
 
         temp = head; 
         head = tail; 
+        tail = temp;
+    }
+
+    Node<T>* split(Node<T>* head) {
+        Node<T>* slow = head;
+        Node<T>* fast = head;
+
+        while(fast->next && fast->next->next ) {
+            slow = slow -> next;
+            fast = fast->next->next;
+        }
+
+        Node<T>* second = slow->next;
+        slow->next = nullptr;
+        if(second) second->prev = nullptr;
+        return second;
+    }
+
+    Node<T>* merge(Node<T>* first , Node<T>* second) {
+        if(!first) return second;
+        if(!second) return first;
+
+        if(first->data < second->data) {
+            first->next = merge(first->next,second);
+            first->next->prev=first;
+            first->prev = nullptr;
+            return first;
+        }else {
+            second->next = merge(first , second->next);
+            second->next->prev = second;
+            second->prev = nullptr;
+            return second;
+        }
+    }
+
+    Node<T>* mergeSort(Node<T>* node) {
+        if(!node || !node->next ) return node;
+        Node<T>* second = split(node);
+        node = mergeSort(node);
+        second = mergeSort(second);
+        return merge(node,second);
+    }
+
+    void sort() {
+        if(!head  || !head->next ) return;
+
+        head = mergeSort(head);
+
+        Node<T>* temp = head;
+        while(temp->next != nullptr) temp = temp->next;
         tail = temp;
     }
 };
@@ -248,4 +298,13 @@ int main() {
   nums.reverse();
   nums.displayForward(); 
   nums.displayBackward();
+
+
+  cout<<"Sorting: \n \n";
+  nums.insertAtBeginning(40);
+  nums.insertAtEnd(50);
+  nums.insertAtIndex(1,60);
+  nums.sort();
+  nums.displayForward();
+
 }
