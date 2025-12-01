@@ -187,6 +187,21 @@ class DLL {
         delete temp;
         size--;
     }
+
+    void reverse() {
+        Node<T>* temp = head; 
+
+        while(temp != nullptr) {
+            Node<T>* swap = temp->next;
+            temp->next =  temp->prev;
+            temp->prev = swap;
+            temp = swap;
+        }
+
+        temp = head; 
+        head = tail; 
+        tail = temp;
+    }
 };
 
 
@@ -219,5 +234,13 @@ int main() {
   nums.displayForward();
 
 
+  cout<<"Reversal: \n \n";
 
+  nums.insertAtBeginning(10);
+  nums.insertAtEnd(30);
+  nums.insertAtIndex(1,20);
+
+  nums.reverse();
+  nums.displayForward(); 
+  nums.displayBackward();
 }
