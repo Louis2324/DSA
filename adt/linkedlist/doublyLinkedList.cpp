@@ -157,7 +157,7 @@ class DLL {
     }
 
     void deleteAtIndex(int index) {
-        if(index < 0 || index > size) {
+        if(index < 0 || index >= size) {
             cout<<"Invalid index \n";
             return;
         }
@@ -174,7 +174,7 @@ class DLL {
 
         Node<T>* temp = head;
 
-        for(int i  = 0 ; i < index - 1 ; i++) {
+        for(int i  = 0 ; i < index  ; i++) {
             temp = temp->next;
         }
 
@@ -185,7 +185,7 @@ class DLL {
         right->prev = left;
 
         delete temp;
-        size--
+        size--;
     }
 };
 
@@ -209,6 +209,15 @@ int main() {
   nums.displayForward();
   nums.displayBackward();
  
+
+  cout<<"Deletion: \n \n";
+  nums.deleteAtIndex(1);
+  nums.displayForward();
+  nums.deleteFront();
+  nums.displayForward();
+  nums.deleteEnd();
+  nums.displayForward();
+
 
 
 }
