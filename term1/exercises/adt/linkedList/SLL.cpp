@@ -32,9 +32,9 @@ public:
         Node *current = head;
         while (current != nullptr)
         {
-            Node *nextNode = current->next; 
-            delete current;                 
-            current = nextNode;           
+            Node *nextNode = current->next;
+            delete current;
+            current = nextNode;
         }
         head = nullptr;
     }
@@ -71,6 +71,39 @@ public:
         Node *temp = new Node(val);
         temp->next = head;
         head = temp;
+        size++;
+    }
+
+    void insertAtPosition(int val, int pos)
+    {
+
+        if (pos < 0 || pos > size)
+            return;
+
+        if (pos == 0)
+        { // 0 based index;
+            insertFront(val);
+            size++;
+            return;
+        }
+
+        if (pos == size)
+        {
+            insertBack(val);
+            size++;
+            return;
+        }
+
+        Node *temp = new Node(val);
+        Node *iter = head;
+
+        for (int i = 0; i < pos - 1; i++)
+        {
+            iter = iter->next;
+        }
+
+        temp->next = iter->next;
+        iter->next = temp;
         size++;
     }
 
@@ -122,4 +155,27 @@ public:
         delete temp;
         size--;
     }
+
+    void deleteAtPosition(int pos)
+    {
+        if (pos < 0 || pos >= size || head == nullptr)
+            return;
+
+        if (pos == 0)
+        {
+            deleteFront();
+            return;
+        }
+
+        Node *iter = head;
+        for (int i = 0; i < pos - 1; i++)
+            iter = iter->next;
+
+        Node *temp = iter->next;
+        iter->next = temp->next;
+        delete temp;
+        size--;
+    }
+
+    
 };
