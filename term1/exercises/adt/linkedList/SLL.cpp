@@ -19,12 +19,14 @@ class LinkedList
 private:
     Node *head;
     int size;
+    bool sorted;
 
 public:
     LinkedList()
     {
         head = nullptr;
         size = 0;
+        sorted = false;
     }
 
     ~LinkedList()
@@ -63,6 +65,7 @@ public:
         }
 
         size++;
+        sorted = false;
     }
 
     void insertFront(int val)
@@ -105,6 +108,7 @@ public:
         temp->next = iter->next;
         iter->next = temp;
         size++;
+        sorted = false;
     }
 
     void display()
@@ -176,6 +180,27 @@ public:
         delete temp;
         size--;
     }
+
+    void bubbleSort()
+    {
+        if(head == nullptr || head->next == nullptr) return;
+
+        bool swapped;
+        do{
+            swapped = false;
+            Node * iter = head;
+            while(iter->next != nullptr) {
+                if(iter->data > iter->next->data) {
+                    swap(iter->data , iter->next->data);
+                    swapped = true;
+                }
+                iter = iter->next;
+            }
+        }while(swapped);
+
+        sorted = true;
+    }
+
 
     
 };
