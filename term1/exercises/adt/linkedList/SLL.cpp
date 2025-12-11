@@ -219,7 +219,7 @@ public:
         return -1;
     }
 
-    int binarySearch(int val)
+    bool binarySearch(int val)
     {
         if (!sorted)
             return linearSearch(val);
@@ -238,12 +238,33 @@ public:
                 fast = fast->next->next;
             }
 
-
-            if(mid->data == val) return 0;
-            else if(mid->data < val) start = mid->next;
-            else end = mid;
+            if (mid->data == val)
+                return true;
+            else if (mid->data < val)
+                start = mid->next;
+            else
+                end = mid;
         }
 
-        return -1;
+        return false;
+    }
+
+    void reverse()
+    {
+        Node *previous = nullptr;
+        Node *current = head;
+        Node *nextNode = nullptr;
+
+        while (current != nullptr)
+        {
+            nextNode = current->next; // storing the next value to update iter
+
+            current->next = previous; // reversing
+            previous = current;       // storing prev value for next iteration
+
+            current = nextNode; // updating iterating variable
+        }
+
+        head = previous;
     }
 };
