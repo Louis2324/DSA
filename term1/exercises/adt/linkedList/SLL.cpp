@@ -183,24 +183,67 @@ public:
 
     void bubbleSort()
     {
-        if(head == nullptr || head->next == nullptr) return;
+        if (head == nullptr || head->next == nullptr)
+            return;
 
         bool swapped;
-        do{
+        do
+        {
             swapped = false;
-            Node * iter = head;
-            while(iter->next != nullptr) {
-                if(iter->data > iter->next->data) {
-                    swap(iter->data , iter->next->data);
+            Node *iter = head;
+            while (iter->next != nullptr)
+            {
+                if (iter->data > iter->next->data)
+                {
+                    swap(iter->data, iter->next->data);
                     swapped = true;
                 }
                 iter = iter->next;
             }
-        }while(swapped);
+        } while (swapped);
 
         sorted = true;
     }
 
+    int linearSearch(int val)
+    {
+        Node *iter = head;
+        int pos = 0;
+        while (iter)
+        {
+            if (iter->data == val)
+                return pos;
+            iter = iter->next;
+            pos++;
+        }
+        return -1;
+    }
 
-    
+    int binarySearch(int val)
+    {
+        if (!sorted)
+            return linearSearch(val);
+
+        Node *start = head;
+        Node *end = nullptr;
+
+        while (start != end)
+        {
+            Node *mid = start;
+            Node *fast = start;
+
+            while (fast->next != end && fast->next->next != end)
+            {
+                mid = mid->next;
+                fast = fast->next->next;
+            }
+
+
+            if(mid->data == val) return 0;
+            else if(mid->data < val) start = mid->next;
+            else end = mid;
+        }
+
+        return -1;
+    }
 };
